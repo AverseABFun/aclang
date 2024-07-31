@@ -1,5 +1,9 @@
 github.com/averseabfun/logger v1.0.0 h1:KsKF2wCKw6cLvBOAt2H7GizIWocVxmvZJReWRgtbr6Q=
 github.com/averseabfun/logger v1.0.0/go.mod h1:TeDsMp6ZJmf6mGOafMVlGDjLNig4qMoQEXC7zJeJmyo=
+github.com/averseabfun/logger v1.1.0 h1:OsKK3IzkQ9DpHOsUN+odQx5E81Y8nvAbn3YXW9ClrDE=
+github.com/averseabfun/logger v1.1.0/go.mod h1:TeDsMp6ZJmf6mGOafMVlGDjLNig4qMoQEXC7zJeJmyo=
+github.com/averseabfun/logger v1.2.0 h1:IxQYyCrtiOhEypm7aQ+uOHpGd2qoPiDIwp/pCwwQA/o=
+github.com/averseabfun/logger v1.2.0/go.mod h1:TeDsMp6ZJmf6mGOafMVlGDjLNig4qMoQEXC7zJeJmyo=
 github.com/fatih/color v1.17.0 h1:GlRw1BRJxkpqUCBKzKOw098ed57fEsKeNjpTe3cSjK4=
 github.com/fatih/color v1.17.0/go.mod h1:YZ7TlrGPkiz6ku9fK3TLD/pl3CpsiFyu8N92HLgmosI=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
