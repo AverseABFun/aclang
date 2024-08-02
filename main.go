@@ -54,6 +54,7 @@ const (
 	internalCodeChildren       = "\x01\x82"
 	internalID                 = "\x01\x83"
 	internalEndFile            = "\x01\x84"
+	internalAdventureType      = "\x01\x85"
 
 	internalIDString          = "ACLANG"
 	internalVersionRuntimeSep = "\x00\x00"
@@ -170,10 +171,10 @@ const (
 
 type ID uint32
 
-var largestID ID = math.MaxUint32
+var largestID ID = 0
 
 func createID() ID {
-	largestID++
+	largestID += 1
 	if largestID == math.MaxUint32 {
 		panic(fmt.Sprintf("too many game objects - attempted to create id for %dth one", math.MaxUint32))
 	}
@@ -266,7 +267,11 @@ type Adventure interface {
 func GetString(obj GameObject) string {
 	var out = ""
 	out += internalID
-	out += strconv.Itoa(int(obj.GetID()))
+	var temp = []byte{byte(obj.GetID())}
+	if len(temp) == 1 {
+		temp = append([]byte{0}, temp[0])
+	}
+	out += string(temp)
 	out += internalEndProperty
 	out += internalType
 	switch v := obj.(type) {
@@ -417,6 +422,17 @@ func Compile(adv Adventure) []byte {
 	}
 	logger.Logf(logger.LogInfo, "Assigned IDs for all %d game objects", largestID)
 	var out = internalIDString + AclangVersion.String() + internalVersionRuntimeSep + SupportedRuntimes.String() + internalEndRuntime
+	out += internalBeginLookup
+	out += internalID
+	var temp = []byte{byte(adv.GetID())}
+	if len(temp) == 1 {
+		temp = append([]byte{0}, temp[0])
+	}
+	out += string(temp)
+	out += internalEndProperty
+	out += internalType
+	out += internalAdventureType
+	out += internalEndProperty
 	out += internalStartingRoom
 	out += strconv.Itoa(int(adv.GetStartingRoom()))
 	out += internalEndCurLookup
@@ -427,7 +443,6 @@ func Compile(adv Adventure) []byte {
 	out += adv.GetStartingText()
 	out += internalEndCurLookup
 
-	out += internalBeginLookup
 	for _, obj := range adv.GetAllGameObjects() {
 		out += GetString(*obj)
 	}
